@@ -988,7 +988,7 @@ void Reframe360Factory::describe(OFX::ImageEffectDescriptor &p_Desc)
 
     // Setup OpenCL and CUDA render capability flags
     p_Desc.addSupportedContext(OFX::eContextGeneral);
-    p_Desc.addSupportedRenderMethod(OFX::eRenderOpenCL);
+    //p_Desc.addSupportedRenderMethod(OFX::eRenderOpenCL);
 #ifndef __APPLE__
     p_Desc.setSupportsCudaRender(true);
 #endif
