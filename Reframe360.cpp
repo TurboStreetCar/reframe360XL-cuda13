@@ -813,12 +813,12 @@ static int interpParam(OFX::ChoiceParam *param, const OFX::RenderArguments &p_Ar
 void Reframe360::setupAndProcess(ImageScaler &p_ImageScaler, const OFX::RenderArguments &p_Args)
 {
     // Get the dst image
-    std::auto_ptr<OFX::Image> dst(m_DstClip->fetchImage(p_Args.time));
+    std::unique_ptr<OFX::Image> dst(m_DstClip->fetchImage(p_Args.time));
     OFX::BitDepthEnum dstBitDepth = dst->getPixelDepth();
     OFX::PixelComponentEnum dstComponents = dst->getPixelComponents();
 
     // Get the src image
-    std::auto_ptr<OFX::Image> src(m_SrcClip->fetchImage(p_Args.time));
+    std::unique_ptr<OFX::Image> src(m_SrcClip->fetchImage(p_Args.time));
     OFX::BitDepthEnum srcBitDepth = src->getPixelDepth();
     OFX::PixelComponentEnum srcComponents = src->getPixelComponents();
 
@@ -987,7 +987,8 @@ void Reframe360Factory::describe(OFX::ImageEffectDescriptor &p_Desc)
     p_Desc.setSupportsMultipleClipPARs(kSupportsMultipleClipPARs);
 
     // Setup OpenCL and CUDA render capability flags
-    p_Desc.setSupportsOpenCLRender(true);
+    p_Desc.addSupportedContext(OFX::eContextGeneral);
+    p_Desc.addSupportedRenderMethod(OFX::eRenderOpenCL);
 #ifndef __APPLE__
     p_Desc.setSupportsCudaRender(true);
 #endif
