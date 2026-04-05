@@ -16,7 +16,7 @@ ifeq ($(UNAME_SYSTEM), Linux)
 	CXXFLAGS += -fPIC -Dlinux -D__OPENCL__
 	
 	NVCCFLAGS = --compiler-options="-fPIC" -std=c++17 -gencode arch=compute_86,code=sm_86 -gencode arch=compute_89,code=sm_89 -gencode arch=compute_100,code=sm_100
-	LDFLAGS = -shared -fvisibility=hidden -L${CUDAPATH}/lib64 -lcuda -lcudart
+	LDFLAGS = -shared -fvisibility=hidden -L${CUDAPATH}/lib64 -L${CUDAPATH}/lib64/stubs -lcuda -lcudart
 	BUNDLE_DIR = Reframe360.ofx.bundle/Contents/Linux-x86-64/
 	CUDA_OBJ =  Reframe360CudaKernel.o
 	OPENCL_OBJ = Reframe360CLKernel.o
