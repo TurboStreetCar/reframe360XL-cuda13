@@ -1,15 +1,15 @@
 UNAME_SYSTEM := $(shell uname -s)
 
 GLMPATH = ../glm
-CUDAPATH ?= /usr/local/cuda
+CUDAPATH ?= /opt/cuda
 NVCC = ${CUDAPATH}/bin/nvcc
 CXXFLAGS += -std=c++11 -fvisibility=hidden -I$(OFXPATH)/include -I$(BMDOFXDEVPATH)/Support/include -I$(BMDOFXDEVPATH)/OpenFX-1.4/include -I$(GLMPATH)
 
 ifeq ($(UNAME_SYSTEM), Linux)
 	BMDOFXDEVPATH = /opt/resolve/Developer/OpenFX
 	OPENCLPATH = /usr
-	CXXFLAGS += -I${OPENCLPATH}/include -fPIC -Dlinux -D__OPENCL__
-	NVCCFLAGS = --compiler-options="-fPIC"
+	CXXFLAGS += CXXFLAGS += -std=c++17 -fvisibility=hidden -I$(OFXPATH)/include -fPIC -Dlinux -D__OPENCL__
+	NVCCFLAGS = --compiler-options="-fPIC" -std=c++17 -gencode arch=compute_86,code=sm_86 -gencode arch=compute_89,code=sm_89 -gencode arch=compute_100,code=sm_100
 	LDFLAGS = -shared -fvisibility=hidden -L${CUDAPATH}/lib64 -lcuda -lcudart
 	BUNDLE_DIR = Reframe360.ofx.bundle/Contents/Linux-x86-64/
 	CUDA_OBJ =  Reframe360CudaKernel.o
