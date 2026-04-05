@@ -29,17 +29,13 @@ jobs:
 
       - name: Compile with Makefile
         run: |
+          # 1. Set the path to the CUDA 13 toolkit provided by the runner
           export CUDAPATH=$CUDA_PATH
-          # Point the build to the local SDK folder we just downloaded
+          
+          # 2. Tell the Makefile exactly where we just downloaded the OpenFX headers
           export BMDOFXDEVPATH=$GITHUB_WORKSPACE/openfx-sdk
-          make clean
-          make
-
-
-      - name: Compile with Makefile
-        run: |
-          # Use the environment variable set by the cuda-toolkit action
-          export CUDAPATH=$CUDA_PATH
+          
+          # 3. Clean and build
           make clean
           make
 
