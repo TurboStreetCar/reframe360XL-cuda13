@@ -20,8 +20,20 @@ jobs:
 
       - name: Install Build Dependencies
         run: |
-          sudo apt-get update          
+          sudo apt-get update
           sudo apt-get install -y build-essential ocl-icd-opencl-dev opencl-headers
+
+      - name: Download OpenFX SDK
+        run: |
+          git clone https://github.com openfx-sdk
+
+      - name: Compile with Makefile
+        run: |
+          export CUDAPATH=$CUDA_PATH
+          # Point the build to the local SDK folder we just downloaded
+          export BMDOFXDEVPATH=$GITHUB_WORKSPACE/openfx-sdk
+          make clean
+          make
 
 
       - name: Compile with Makefile
