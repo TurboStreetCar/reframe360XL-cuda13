@@ -25,7 +25,7 @@ jobs:
 
       - name: Download OpenFX SDK
         run: |
-          git clone https://github.com openfx-sdk
+          git clone https://github.com/AcademySoftwareFoundation/openfx openfx-sdk
 
       - name: Compile with Makefile
         run: |
