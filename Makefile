@@ -1,6 +1,6 @@
 UNAME_SYSTEM := $(shell uname -s)
 
-GLMPATH = ../glm
+GLMPATH = /usr/include
 CUDAPATH ?= /opt/cuda
 NVCC = ${CUDAPATH}/bin/nvcc
 
