@@ -2,6 +2,8 @@ name: Build Reframe360XL (Linux)
 
 on: 
   workflow_dispatch: # This adds the "Run workflow" button in the Actions tab
+  push:
+    branches: [ "main" ] # Or "master"
 
 jobs:
   build:
